@@ -50,5 +50,24 @@ export default function Tree(array = undefined) {
     }
   }
 
-  return { root, prettyPrint };
+  function insert(value) {
+    //
+  }
+
+  function remove(value) {
+    //
+  }
+
+  function find(value, currentNode = root) {
+    console.log(currentNode.data);
+    if (currentNode.data === value) {
+      return currentNode;
+    } else if (value < currentNode.data && currentNode.left) {
+      return find(value, currentNode.left);
+    } else if (value > currentNode.data && currentNode.right) {
+      return find(value, currentNode.right);
+    }
+  }
+
+  return { root, prettyPrint, insert, find };
 }
