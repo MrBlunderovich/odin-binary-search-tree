@@ -50,8 +50,24 @@ export default function Tree(array = undefined) {
     }
   }
 
-  function insert(value) {
-    //
+  function insert(value, currentNode = root) {
+    console.log(currentNode.data);
+    if (value === currentNode.data) {
+      console.error("Cannot insert duplicate value.");
+      return;
+    } else if (value < currentNode.data) {
+      if (currentNode.left === null) {
+        currentNode.left = Node(value);
+        return;
+      }
+      insert(value, (currentNode = currentNode.left));
+    } else if (value > currentNode.data) {
+      if (currentNode.right === null) {
+        currentNode.right = Node(value);
+        return;
+      }
+      insert(value, (currentNode = currentNode.right));
+    }
   }
 
   function remove(value) {
@@ -67,6 +83,7 @@ export default function Tree(array = undefined) {
     } else if (value > currentNode.data && currentNode.right) {
       return find(value, currentNode.right);
     }
+    return null;
   }
 
   return { root, prettyPrint, insert, find };
