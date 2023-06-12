@@ -70,12 +70,67 @@ export default function Tree(array = undefined) {
     }
   }
 
+  function insertNode(newNode, currentNode = root) {
+    //console.log("currentNodeValue: ", currentNode.data);
+    if (newNode.data === currentNode.data) {
+      console.error("Cannot insert duplicate value.");
+      return;
+    } else if (newNode.data < currentNode.data) {
+      if (currentNode.left === null) {
+        currentNode.left = newNode;
+        return;
+      }
+      insertNode(newNode, (currentNode = currentNode.left));
+    } else if (newNode.data > currentNode.data) {
+      if (currentNode.right === null) {
+        currentNode.right = newNode;
+        return;
+      }
+      insertNode(newNode, (currentNode = currentNode.right));
+    }
+  }
+
   function remove(value) {
-    //
+    root = removeRecursive(value, root);
+
+    function removeRecursive(value, currentNode) {
+      //base case:
+      if (currentNode === null) {
+        console.log(`Value ${value} was not found.`);
+        return currentNode;
+      }
+      if (value < currentNode.data) {
+        currentNode.left = removeRecursive(value, currentNode.left);
+      }
+      if (value > currentNode.data) {
+        currentNode.right = removeRecursive(value, currentNode.right);
+      }
+      if (currentNode.data === value) {
+        //delete this node
+        if (!currentNode.left) {
+          return currentNode.right;
+        } else if (!currentNode.right) {
+          return currentNode.left;
+        } else {
+          currentNode.data = findMinValue(currentNode.right);
+          currentNode.right = removeRecursive(
+            currentNode.data,
+            currentNode.right
+          );
+        }
+      }
+
+      return currentNode;
+    }
+    function findMinValue(currentNode) {
+      if (!currentNode.left) {
+        return currentNode.data;
+      }
+      return findMinValue(currentNode.left);
+    }
   }
 
   function find(value, currentNode = root) {
-    console.log(currentNode.data);
     if (currentNode.data === value) {
       return currentNode;
     } else if (value < currentNode.data && currentNode.left) {
@@ -86,5 +141,5 @@ export default function Tree(array = undefined) {
     return null;
   }
 
-  return { root, prettyPrint, insert, find };
+  return { root, prettyPrint, insert, find, insertNode, remove };
 }
