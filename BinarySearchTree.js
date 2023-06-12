@@ -166,14 +166,41 @@ export default function Tree(array = undefined) {
 
   function inorder(callback = undefined, currentNode = root, array = []) {
     if (currentNode === null) {
-      return;
+      return array;
     }
-    inorder(callback, currentNode.left, array);
+    array.concat(inorder(callback, currentNode.left, array));
     array.push(currentNode.data);
     if (callback) {
       callback(currentNode.data);
     }
-    inorder(callback, currentNode.right, array);
+    array.concat(inorder(callback, currentNode.right, array));
+    return array;
+  }
+
+  function preorder(callback = undefined, currentNode = root, array = []) {
+    if (currentNode === null) {
+      return array;
+    }
+    array.push(currentNode.data);
+    if (callback) {
+      callback(currentNode.data);
+    }
+    array.concat(preorder(callback, currentNode.left, array));
+    array.concat(preorder(callback, currentNode.right, array));
+    return array;
+  }
+
+  function postorder(callback = undefined, currentNode = root, array = []) {
+    if (currentNode === null) {
+      return array;
+    }
+    array.concat(postorder(callback, currentNode.left, array));
+    array.concat(postorder(callback, currentNode.right, array));
+    array.push(currentNode.data);
+    if (callback) {
+      callback(currentNode.data);
+    }
+    return array;
   }
 
   return {
@@ -185,5 +212,7 @@ export default function Tree(array = undefined) {
     remove,
     levelOrder,
     inorder,
+    preorder,
+    postorder,
   };
 }
