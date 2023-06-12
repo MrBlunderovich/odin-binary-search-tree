@@ -21,5 +21,4 @@ myTree.remove(9); */
   myTree.remove(element);
   myTree.prettyPrint();
 }); */
-myTree.levelOrder(console.log);
-console.log(myTree.levelOrder());
+myTree.inorder(console.log);

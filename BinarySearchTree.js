@@ -164,5 +164,26 @@ export default function Tree(array = undefined) {
     return array;
   }
 
-  return { root, prettyPrint, insert, find, insertNode, remove, levelOrder };
+  function inorder(callback = undefined, currentNode = root, array = []) {
+    if (currentNode === null) {
+      return;
+    }
+    inorder(callback, currentNode.left, array);
+    array.push(currentNode.data);
+    if (callback) {
+      callback(currentNode.data);
+    }
+    inorder(callback, currentNode.right, array);
+  }
+
+  return {
+    root,
+    prettyPrint,
+    insert,
+    find,
+    insertNode,
+    remove,
+    levelOrder,
+    inorder,
+  };
 }
