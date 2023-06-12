@@ -141,5 +141,28 @@ export default function Tree(array = undefined) {
     return null;
   }
 
-  return { root, prettyPrint, insert, find, insertNode, remove };
+  function levelOrder(callback = undefined) {
+    if (!root) {
+      return;
+    }
+    const array = [];
+    const queue = [root];
+    while (queue.length > 0) {
+      const front = queue[0];
+      if (front.left) {
+        queue.push(front.left);
+      }
+      if (front.right) {
+        queue.push(front.right);
+      }
+      const currentValue = queue.shift().data;
+      if (callback) {
+        callback(currentValue);
+      }
+      array.push(currentValue);
+    }
+    return array;
+  }
+
+  return { root, prettyPrint, insert, find, insertNode, remove, levelOrder };
 }
