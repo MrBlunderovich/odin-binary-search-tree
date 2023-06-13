@@ -287,6 +287,11 @@ export default function Tree(array = undefined) {
     return true;
   }
 
+  function rebalance() {
+    const arrayFromTree = inorder();
+    root = buildTree(arrayFromTree);
+  }
+
   return {
     root,
     prettyPrint,
@@ -302,5 +307,6 @@ export default function Tree(array = undefined) {
     depth,
     isBalanced,
     isBalancedBFS,
+    rebalance,
   };
 }

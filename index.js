@@ -33,5 +33,5 @@ myTree.insert(323);
 myTree.insert(0);
 myTree.prettyPrint();
 console.log(myTree.isBalancedBFS());
-console.log("-------------------------");
-console.log(myTree.isBalanced());
+myTree.rebalance();
+myTree.prettyPrint();
