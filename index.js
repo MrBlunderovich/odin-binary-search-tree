@@ -21,6 +21,7 @@ myTree.remove(9); */
   myTree.remove(element);
   myTree.prettyPrint();
 }); */
-console.log(myTree.inorder(console.log));
+/* console.log(myTree.inorder(console.log));
 console.log(myTree.preorder(console.log));
-console.log(myTree.postorder(console.log));
+console.log(myTree.postorder(console.log)); */
+console.log("height: ", myTree.height());

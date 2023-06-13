@@ -203,6 +203,17 @@ export default function Tree(array = undefined) {
     return array;
   }
 
+  function height(currentNode = root) {
+    if (currentNode === null) {
+      return -1;
+    }
+    const leftHeight = height(currentNode.left);
+    const rightHeight = height(currentNode.right);
+    const currentNodeHeight = Math.max(leftHeight, rightHeight) + 1;
+
+    return currentNodeHeight;
+  }
+
   return {
     root,
     prettyPrint,
@@ -214,5 +225,6 @@ export default function Tree(array = undefined) {
     inorder,
     preorder,
     postorder,
+    height,
   };
 }
