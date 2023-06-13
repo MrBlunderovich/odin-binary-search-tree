@@ -51,7 +51,6 @@ export default function Tree(array = undefined) {
   }
 
   function insert(value, currentNode = root) {
-    console.log(currentNode.data);
     if (value === currentNode.data) {
       console.error("Cannot insert duplicate value.");
       return;
@@ -233,6 +232,61 @@ export default function Tree(array = undefined) {
     return null;
   }
 
+  function isBalanced(currentNode = root) {
+    if (!currentNode) {
+      return true;
+    }
+
+    const heightDifference = Math.abs(
+      height(currentNode.left) - height(currentNode.right)
+    );
+    console.log({
+      node: currentNode.data,
+      DIFF: heightDifference,
+      L: height(currentNode.left),
+      R: height(currentNode.right),
+    });
+    if (heightDifference > 1) {
+      console.log("difference! ", heightDifference);
+      return false;
+    }
+
+    return Boolean(
+      isBalanced(currentNode.left) * isBalanced(currentNode.right)
+    );
+  }
+  //breadth first search detects imbalance earlier
+  function isBalancedBFS(currentNode = root) {
+    if (!currentNode) {
+      return true;
+    }
+    const queue = [root];
+    while (queue.length > 0) {
+      const front = queue[0];
+      const heightDifference = Math.abs(
+        height(front.left) - height(front.right)
+      );
+      console.log({
+        node: front.data,
+        DIFF: heightDifference,
+        L: height(front.left),
+        R: height(front.right),
+      });
+      if (heightDifference > 1) {
+        console.log("difference! ", heightDifference);
+        return false;
+      }
+      if (front.left) {
+        queue.push(front.left);
+      }
+      if (front.right) {
+        queue.push(front.right);
+      }
+      queue.shift();
+    }
+    return true;
+  }
+
   return {
     root,
     prettyPrint,
@@ -246,5 +300,7 @@ export default function Tree(array = undefined) {
     postorder,
     height,
     depth,
+    isBalanced,
+    isBalancedBFS,
   };
 }

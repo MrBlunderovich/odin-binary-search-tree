@@ -23,10 +23,15 @@ myTree.remove(9); */
 /* console.log(myTree.inorder(console.log));
 console.log(myTree.preorder(console.log));
 console.log(myTree.postorder(console.log)); */
-myTree.prettyPrint();
-console.log("height: ", myTree.height());
+/* console.log("height: ", myTree.height());
 console.log("depth of #67: ", myTree.depth(myTree.find(67)));
 console.log("depth of #4: ", myTree.depth(myTree.find(4)));
 console.log("depth of #88: ", myTree.depth(myTree.find(88)));
 console.log("depth of #9: ", myTree.depth(myTree.find(9)));
-console.log("depth of null: ", myTree.depth(null));
+console.log("depth of null: ", myTree.depth(null)); */
+myTree.insert(323);
+myTree.insert(0);
+myTree.prettyPrint();
+console.log(myTree.isBalancedBFS());
+console.log("-------------------------");
+console.log(myTree.isBalanced());
