@@ -129,7 +129,7 @@ export default function Tree(array = undefined) {
       return findMinValue(currentNode.left);
     }
   }
-
+  //////////////////////////////////////////////////FIND:
   function find(value, currentNode = root) {
     if (currentNode.data === value) {
       return currentNode;
@@ -214,6 +214,25 @@ export default function Tree(array = undefined) {
     return currentNodeHeight;
   }
 
+  function depth(nodeToMeasure, currentNode = root) {
+    if (!nodeToMeasure) {
+      console.log("Incorrect or unexpected input. Nothing to measure.");
+      return null;
+    }
+    if (nodeToMeasure.data < currentNode.data && currentNode.left) {
+      const goDeeper = depth(nodeToMeasure, currentNode.left);
+      return goDeeper === null ? null : goDeeper + 1;
+    }
+    if (nodeToMeasure.data > currentNode.data && currentNode.right) {
+      const goDeeper = depth(nodeToMeasure, currentNode.right);
+      return goDeeper === null ? null : goDeeper + 1;
+    }
+    if (nodeToMeasure.data === currentNode.data) {
+      return 0;
+    }
+    return null;
+  }
+
   return {
     root,
     prettyPrint,
@@ -226,5 +245,6 @@ export default function Tree(array = undefined) {
     preorder,
     postorder,
     height,
+    depth,
   };
 }
