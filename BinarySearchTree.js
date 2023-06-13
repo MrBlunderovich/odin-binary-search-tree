@@ -240,14 +240,14 @@ export default function Tree(array = undefined) {
     const heightDifference = Math.abs(
       height(currentNode.left) - height(currentNode.right)
     );
-    console.log({
+    /* console.log({
       node: currentNode.data,
       DIFF: heightDifference,
       L: height(currentNode.left),
       R: height(currentNode.right),
-    });
+    }); */
     if (heightDifference > 1) {
-      console.log("difference! ", heightDifference);
+      //console.log("difference! ", heightDifference);
       return false;
     }
 
@@ -266,14 +266,14 @@ export default function Tree(array = undefined) {
       const heightDifference = Math.abs(
         height(front.left) - height(front.right)
       );
-      console.log({
+      /* console.log({
         node: front.data,
         DIFF: heightDifference,
         L: height(front.left),
         R: height(front.right),
-      });
+      }); */
       if (heightDifference > 1) {
-        console.log("difference! ", heightDifference);
+        //console.log("difference! ", heightDifference);
         return false;
       }
       if (front.left) {
